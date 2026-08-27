@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     requiredGroups.forEach((group) => {
       let isGroupFilled = false;
 
-      // Verifica Textareas/Inputs de texto
-      const textFields = group.querySelectorAll('textarea, input[type="text"]');
+      // Verifica Textareas/Inputs de texto e telefone
+      const textFields = group.querySelectorAll('textarea, input[type="text"], input[type="tel"]');
       if (textFields.length > 0) {
         textFields.forEach((field) => {
           if (field.value.trim() !== '') {
@@ -80,20 +80,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Coleta dos dados do formulário
     const formData = new FormData(form);
     const data = {
-      negocio: formData.get('negocio'),
+      profissao: formData.get('profissao'),
       faturamento: formData.get('faturamento'),
-      trava: formData.get('trava')
+      obstaculo: formData.get('obstaculo'),
+      investimento: formData.get('investimento'),
+      nome: formData.get('nome'),
+      instagram: formData.get('instagram'),
+      whatsapp: formData.get('whatsapp')
     };
 
     // Geração da mensagem formatada para o WhatsApp
     const message = [
-      '*NOVA APLICAÇÃO*',
+      '*NOVA APLICAÇÃO - MENTORIA*',
       '',
-      `*Já tem um negócio? Sobre ele:*`,
-      data.negocio,
+      `*1. O que faz hoje:*`,
+      data.profissao,
       '',
-      `*Faturamento mensal:* ${data.faturamento}`,
-      `*O que mais trava a escala:* ${data.trava}`
+      `*2. Faturamento mensal:* ${data.faturamento}`,
+      `*3. Maior obstáculo:* ${data.obstaculo}`,
+      `*4. Disponibilidade de investimento:* ${data.investimento}`,
+      '',
+      `*Contato:*`,
+      `- Nome: ${data.nome}`,
+      `- Instagram: ${data.instagram}`,
+      `- WhatsApp: ${data.whatsapp}`
     ].join('\n');
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;

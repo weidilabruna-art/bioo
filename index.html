@@ -25,36 +25,70 @@
           
           <!-- Pergunta 1: Texto Aberto -->
           <div class="q-group" data-required>
-            <label class="q-label" for="negocio">1. Você já tem um negócio? Se sim, me fale um pouco sobre ele.<span class="req">*</span></label>
-            <textarea id="negocio" name="negocio" placeholder="Conte com as suas palavras..." required></textarea>
+            <label class="q-label" for="profissao">1. O que você faz hoje? (Ex: Nail Designer, Esteticista, Mentora...)<span class="req">*</span></label>
+            <textarea id="profissao" name="profissao" placeholder="Descreva brevemente sua profissão ou negócio atual..." required></textarea>
             <span class="error-msg">Escreva a sua resposta para continuar.</span>
           </div>
 
           <!-- Pergunta 2: Select Dropdown -->
           <div class="q-group" data-required>
-            <label class="q-label" for="faturamento">2. Atualmente, quanto você fatura mensalmente?<span class="req">*</span></label>
+            <label class="q-label" for="faturamento">2. Atualmente, qual é o seu faturamento mensal aproximado com os seus serviços/negócio?<span class="req">*</span></label>
             <select id="faturamento" name="faturamento" required>
               <option value="" disabled selected>Selecione</option>
-              <option value="Estou apenas começando agora">Estou apenas começando agora</option>
-              <option value="R$ 0 a R$ 5 mil">R$ 0 a R$ 5 mil</option>
-              <option value="R$ 5 mil a R$ 10 mil">R$ 5 mil a R$ 10 mil</option>
-              <option value="R$ 10 mil a R$ 20 mil">R$ 10 mil a R$ 20 mil</option>
-              <option value="Mais de R$ 20 mil por mês">Mais de R$ 20 mil por mês</option>
+              <option value="Até R$ 3.000 / mês">Até R$ 3.000 / mês</option>
+              <option value="De R$ 3.000 a R$ 7.000 / mês">De R$ 3.000 a R$ 7.000 / mês</option>
+              <option value="De R$ 7.000 a R$ 15.000 / mês">De R$ 7.000 a R$ 15.000 / mês</option>
+              <option value="Mais de R$ 15.000 / mês">Mais de R$ 15.000 / mês</option>
             </select>
             <span class="error-msg">Selecione uma faixa para continuar.</span>
           </div>
 
           <!-- Pergunta 3: Select Dropdown -->
           <div class="q-group" data-required>
-            <label class="q-label" for="trava">3. O que você acha que mais trava a sua escala hoje?<span class="req">*</span></label>
-            <select id="trava" name="trava" required>
+            <label class="q-label" for="obstaculo">3. Qual é o seu maior obstáculo hoje para tirar o seu produto digital do papel?<span class="req">*</span></label>
+            <select id="obstaculo" name="obstaculo" required>
               <option value="" disabled selected>Selecione</option>
-              <option value="Falta de estratégia">Falta de estratégia</option>
-              <option value="Falta de caixa para investir">Falta de caixa para investir</option>
-              <option value="Falta de conhecimento (não sei como fazer)">Falta de conhecimento (não sei como fazer)</option>
-              <option value="Falta de constância nos resultados">Falta de constância nos resultados</option>
+              <option value="Não sei como estruturar meu conhecimento em um método organizado.">Não sei como estruturar meu conhecimento em um método organizado.</option>
+              <option value="Não sei vender na internet (medo de aparecer ou falta de estratégia de vendas).">Não sei vender na internet (medo de aparecer ou falta de estratégia de vendas).</option>
+              <option value="Não tenho tempo para focar na criação por conta dos atendimentos físicos.">Não tenho tempo para focar na criação por conta dos atendimentos físicos.</option>
+              <option value="Já tentei criar/vender algo, mas não tive resultados expressivos.">Já tentei criar/vender algo, mas não tive resultados expressivos.</option>
             </select>
             <span class="error-msg">Selecione uma opção para continuar.</span>
+          </div>
+
+          <!-- Pergunta 4: Select Dropdown -->
+          <div class="q-group" data-required>
+            <label class="q-label" for="investimento">4. Se você for selecionada, quanto tem disponível para investir no seu projeto hoje?<span class="req">*</span></label>
+            <select id="investimento" name="investimento" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="Entre R$ 1.000 e R$ 3.000">Entre R$ 1.000 e R$ 3.000</option>
+              <option value="Entre R$ 3.000 e R$ 5.000">Entre R$ 3.000 e R$ 5.000</option>
+              <option value="Acima de R$ 5.000">Acima de R$ 5.000</option>
+            </select>
+            <span class="error-msg">Selecione uma opção para continuar.</span>
+          </div>
+
+          <!-- Pergunta 5: Dados de Contato -->
+          <div class="contact-section">
+            <h2 class="section-title">5. Suas informações de contato</h2>
+            
+            <div class="q-group" data-required>
+              <label class="q-label" for="nome">Nome completo<span class="req">*</span></label>
+              <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+              <span class="error-msg">Digite seu nome para continuar.</span>
+            </div>
+
+            <div class="q-group" data-required>
+              <label class="q-label" for="instagram">Link do seu Instagram (ou @usuario)<span class="req">*</span></label>
+              <input type="text" id="instagram" name="instagram" placeholder="Ex: @seu.perfil" required>
+              <span class="error-msg">Digite seu Instagram para continuar.</span>
+            </div>
+
+            <div class="q-group" data-required>
+              <label class="q-label" for="whatsapp">Seu WhatsApp<span class="req">*</span></label>
+              <input type="tel" id="whatsapp" name="whatsapp" placeholder="(DDD) 99999-9999" required>
+              <span class="error-msg">Digite seu número de WhatsApp para continuar.</span>
+            </div>
           </div>
 
           <button type="submit" id="submit-btn" class="submit-button">Enviar Minha Aplicação</button>
