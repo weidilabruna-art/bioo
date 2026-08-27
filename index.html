@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplicação Mentoria · Transforme seu Conhecimento em Produto Digital</title>
+  
+  <!-- Fontes Premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="wrap">
+    <!-- Coluna do Formulário -->
+    <section class="form-side" id="form-container">
+      <div class="form-card" id="form-content">
+        <h1>Transforme seu conhecimento em produto digital</h1>
+        <p class="sub">Se você já tem uma profissão e quer criar um produto digital escalável para faturar mais e ter liberdade, responda a aplicação abaixo.</p>
+        
+        <form id="app-form" onsubmit="return false;">
+          
+          <!-- Pergunta 1: Texto Aberto -->
+          <div class="q-group" data-required>
+            <label class="q-label" for="negocio">1. Você já tem um negócio? Se sim, me fale um pouco sobre ele.<span class="req">*</span></label>
+            <textarea id="negocio" name="negocio" placeholder="Conte com as suas palavras..." required></textarea>
+            <span class="error-msg">Escreva a sua resposta para continuar.</span>
+          </div>
+
+          <!-- Pergunta 2: Select Dropdown -->
+          <div class="q-group" data-required>
+            <label class="q-label" for="faturamento">2. Atualmente, quanto você fatura mensalmente?<span class="req">*</span></label>
+            <select id="faturamento" name="faturamento" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="Estou apenas começando agora">Estou apenas começando agora</option>
+              <option value="R$ 0 a R$ 5 mil">R$ 0 a R$ 5 mil</option>
+              <option value="R$ 5 mil a R$ 10 mil">R$ 5 mil a R$ 10 mil</option>
+              <option value="R$ 10 mil a R$ 20 mil">R$ 10 mil a R$ 20 mil</option>
+              <option value="Mais de R$ 20 mil por mês">Mais de R$ 20 mil por mês</option>
+            </select>
+            <span class="error-msg">Selecione uma faixa para continuar.</span>
+          </div>
+
+          <!-- Pergunta 3: Select Dropdown -->
+          <div class="q-group" data-required>
+            <label class="q-label" for="trava">3. O que você acha que mais trava a sua escala hoje?<span class="req">*</span></label>
+            <select id="trava" name="trava" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="Falta de estratégia">Falta de estratégia</option>
+              <option value="Falta de caixa para investir">Falta de caixa para investir</option>
+              <option value="Falta de conhecimento (não sei como fazer)">Falta de conhecimento (não sei como fazer)</option>
+              <option value="Falta de constância nos resultados">Falta de constância nos resultados</option>
+            </select>
+            <span class="error-msg">Selecione uma opção para continuar.</span>
+          </div>
+
+          <button type="submit" id="submit-btn" class="submit-button">Enviar Minha Aplicação</button>
+          
+          <div class="form-notice" id="form-notice">
+            Responda os campos destacados para enviar.
+          </div>
+        </form>
+      </div>
+
+      <!-- Tela de Sucesso -->
+      <div class="success-card" id="success-content" style="display: none;">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2>Aplicação enviada!</h2>
+        <p>Abrimos o WhatsApp com as suas respostas já preenchidas.</p>
+        <p class="accent-text">Toque em enviar dentro do WhatsApp para concluir e falar comigo.</p>
+        
+        <a id="wa-action-btn" href="#" target="_blank" class="success-button">
+          Concluir no WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <!-- Coluna da Foto -->
+    <aside class="photo-side" aria-hidden="true">
+      <div class="photo-overlay"></div>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
