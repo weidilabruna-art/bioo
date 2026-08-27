@@ -399,7 +399,7 @@ textarea:focus, input[type="text"]:focus, input[type="tel"]:focus, select:focus 
   }
   .photo-side {
     order: -1;
-    min-height: 380px;
+    min-height: 280px;
     background-position: center 20%;
   }
   .form-side {
