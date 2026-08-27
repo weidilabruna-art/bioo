@@ -2,10 +2,10 @@
 // Substitua o número abaixo pelo seu número de WhatsApp de atendimento.
 const WHATSAPP_NUMBER = '5531993773678'; 
 
-// ===== CONFIGURAÇÃO DO WEBHOOK (MAKE / GOOGLE SHEETS / E-MAIL) =====
-// Se você criar um cenário no Make.com para salvar as aplicações em uma planilha 
-// ou enviar alertas por e-mail, cole a URL do seu Webhook entre as aspas abaixo:
-const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/glcls349rn8gm1vqi6v5lcfkri8azppp'; 
+// ===== CONFIGURAÇÃO DE RECEBIMENTO POR E-MAIL (FORMSUBMIT) =====
+// Digite abaixo o e-mail onde deseja receber as notificações de novas aplicações.
+// O FormSubmit enviará o e-mail automaticamente e salvará os dados em seu painel gratuito.
+const NOTIFICATION_EMAIL = 'weidilabruna@gmail.com'; 
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('app-form');
@@ -108,15 +108,23 @@ document.addEventListener('DOMContentLoaded', () => {
       data.dificuldade
     ].join('\n');
 
-    // Envia os dados para o Webhook do Make (caso configurado)
-    if (MAKE_WEBHOOK_URL) {
-      fetch(MAKE_WEBHOOK_URL, {
+    // Envia os dados para o FormSubmit (receber por e-mail e salvar no painel)
+    if (NOTIFICATION_EMAIL) {
+      fetch(`https://formsubmit.co/ajax/${NOTIFICATION_EMAIL}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify(data)
-      }).catch(err => console.warn('Erro ao enviar dados para o Webhook:', err));
+        body: JSON.stringify({
+          'Nome Completo': data.nome,
+          'WhatsApp': data.whatsapp,
+          'Sobre o Negócio': data.negocio,
+          'Já tem Produto Digital?': data.produto_digital,
+          'Faturamento Mensal': data.faturamento,
+          'Maior Dificuldade': data.dificuldade
+        })
+      }).catch(err => console.warn('Erro ao enviar dados para o FormSubmit:', err));
     }
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
