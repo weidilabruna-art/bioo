@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Evento de Envio
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     let isValid = true;
@@ -79,6 +79,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // Desabilita o botão de submit e mostra "Enviando..."
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.innerHTML : 'Enviar Minha Aplicação';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Enviando...';
+    }
+
     // Coleta dos dados do formulário
     const formData = new FormData(form);
     const data = {
@@ -107,23 +115,34 @@ document.addEventListener('DOMContentLoaded', () => {
       data.dificuldade
     ].join('\n');
 
-    // Envia os dados para o Forminit (salvar no painel e receber notificações por e-mail)
+    // Envia os dados para o Forminit e aguarda o término da requisição
     if (FORMINIT_URL) {
-      const formData = new FormData();
-      formData.append('Nome Completo', data.nome);
-      formData.append('WhatsApp', data.whatsapp);
-      formData.append('Sobre o Negócio', data.negocio);
-      formData.append('Já tem Produto Digital?', data.produto_digital);
-      formData.append('Faturamento Mensal', data.faturamento);
-      formData.append('Maior Dificuldade', data.dificuldade);
+      const formDataToSend = new FormData();
+      formDataToSend.append('Nome Completo', data.nome);
+      formDataToSend.append('WhatsApp', data.whatsapp);
+      formDataToSend.append('Sobre o Negócio', data.negocio);
+      formDataToSend.append('Já tem Produto Digital?', data.produto_digital);
+      formDataToSend.append('Faturamento Mensal', data.faturamento);
+      formDataToSend.append('Maior Dificuldade', data.dificuldade);
 
-      fetch(FORMINIT_URL, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json'
-        },
-        body: formData
-      }).catch(err => console.warn('Erro ao enviar dados para o Forminit:', err));
+      try {
+        await fetch(FORMINIT_URL, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json'
+          },
+          body: formDataToSend
+        });
+        console.log('Dados enviados ao Forminit com sucesso!');
+      } catch (err) {
+        console.warn('Erro ao enviar dados para o Forminit:', err);
+      }
+    }
+
+    // Restaura o botão de submit
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnText;
     }
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
