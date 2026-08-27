@@ -5,7 +5,7 @@ const WHATSAPP_NUMBER = '5531993773678';
 // ===== CONFIGURAÇÃO DO WEBHOOK (MAKE / GOOGLE SHEETS / E-MAIL) =====
 // Se você criar um cenário no Make.com para salvar as aplicações em uma planilha 
 // ou enviar alertas por e-mail, cole a URL do seu Webhook entre as aspas abaixo:
-const MAKE_WEBHOOK_URL = ''; 
+const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/glcls349rn8gm1vqi6v5lcfkri8azppp'; 
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('app-form');
