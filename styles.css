@@ -62,14 +62,14 @@ html, body {
   font-size: 34px;
   font-weight: 700;
   line-height: 1.25;
-  color: var(--teal);
+  color: #995704; /* Gold title */
   margin-bottom: 12px;
 }
 
 .form-card .sub {
   font-size: 15.5px;
   line-height: 1.5;
-  color: #555;
+  color: var(--teal); /* Dark brown subtitle */
   margin-bottom: 36px;
   font-weight: 400;
 }
@@ -346,14 +346,14 @@ textarea:focus, input[type="text"]:focus, input[type="tel"]:focus, select:focus 
   font-family: var(--font-serif);
   font-size: 32px;
   font-weight: 700;
-  color: var(--teal);
+  color: #995704; /* Gold heading */
   margin-bottom: 16px;
 }
 
 .success-card p {
   font-size: 15.5px;
   line-height: 1.6;
-  color: #555;
+  color: var(--teal); /* Dark brown paragraph text */
   margin-bottom: 12px;
 }
 
