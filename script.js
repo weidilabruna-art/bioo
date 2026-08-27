@@ -109,20 +109,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Envia os dados para o Forminit (salvar no painel e receber notificações por e-mail)
     if (FORMINIT_URL) {
+      const formData = new FormData();
+      formData.append('Nome Completo', data.nome);
+      formData.append('WhatsApp', data.whatsapp);
+      formData.append('Sobre o Negócio', data.negocio);
+      formData.append('Já tem Produto Digital?', data.produto_digital);
+      formData.append('Faturamento Mensal', data.faturamento);
+      formData.append('Maior Dificuldade', data.dificuldade);
+
       fetch(FORMINIT_URL, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify({
-          'Nome Completo': data.nome,
-          'WhatsApp': data.whatsapp,
-          'Sobre o Negócio': data.negocio,
-          'Já tem Produto Digital?': data.produto_digital,
-          'Faturamento Mensal': data.faturamento,
-          'Maior Dificuldade': data.dificuldade
-        })
+        body: formData
       }).catch(err => console.warn('Erro ao enviar dados para o Forminit:', err));
     }
 
