@@ -105,11 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
       `*Nome:* ${data.nome}`,
       `*WhatsApp:* ${data.whatsapp}`,
       '',
-      `*1. Já tem um negócio? Sobre ele:*`,
+      `*1. O que vende ou deseja vender:*`,
       data.negocio,
       '',
       `*2. Já tem um produto digital?* ${data.produto_digital}`,
-      `*3. Faturamento mensal hoje:* ${data.faturamento}`,
+      `*3. Qual a média do faturamento mensal?* ${data.faturamento}`,
       '',
       `*4. Maior dificuldade hoje:*`,
       data.dificuldade

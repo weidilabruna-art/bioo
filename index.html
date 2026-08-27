@@ -37,10 +37,10 @@
             <span class="error-msg">Digite seu número de WhatsApp para continuar.</span>
           </div>
 
-          <!-- Pergunta 3: Você já tem um negócio? -->
+          <!-- Pergunta 3: Me conta um pouco sobre o seu negócio -->
           <div class="q-group" data-required>
-            <label class="q-label" for="negocio">3. Você já tem um negócio? Se sim, me fale um pouco sobre ele.<span class="req">*</span></label>
-            <textarea id="negocio" name="negocio" placeholder="Descreva brevemente sua profissão ou negócio atual..." required></textarea>
+            <label class="q-label" for="negocio">3. Me conta um pouco sobre o seu negócio: o que você vende (ou deseja vender) hoje?<span class="req">*</span></label>
+            <textarea id="negocio" name="negocio" placeholder="Descreva brevemente o que você vende ou seu projeto de produto/serviço..." required></textarea>
             <span class="error-msg">Escreva a sua resposta para continuar.</span>
           </div>
 
@@ -57,12 +57,15 @@
 
           <!-- Pergunta 5: Faturamento -->
           <div class="q-group" data-required>
-            <label class="q-label" for="faturamento">5. Faturamento mensal hoje?<span class="req">*</span></label>
+            <label class="q-label" for="faturamento">5. Qual a média do seu faturamento mensal hoje?<span class="req">*</span></label>
             <select id="faturamento" name="faturamento" required>
               <option value="" disabled selected>Selecione</option>
-              <option value="Até 5k">Até 5k</option>
-              <option value="5k–20k">5k–20k</option>
-              <option value="+20k">+20k</option>
+              <option value="Abaixo de R$ 3.000">Abaixo de R$ 3.000</option>
+              <option value="Entre R$ 3.000 e R$ 7.000">Entre R$ 3.000 e R$ 7.000</option>
+              <option value="Entre R$ 7.000 e R$ 12.000">Entre R$ 7.000 e R$ 12.000</option>
+              <option value="Entre R$ 12.000 e R$ 25.000">Entre R$ 12.000 e R$ 25.000</option>
+              <option value="Entre R$ 25.000 e R$ 50.000">Entre R$ 25.000 e R$ 50.000</option>
+              <option value="Acima de R$ 50.000">Acima de R$ 50.000</option>
             </select>
             <span class="error-msg">Selecione uma opção para continuar.</span>
           </div>
