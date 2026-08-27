@@ -175,3 +175,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1500);
   });
 });
+
+// ===== TRAVAMENTO DE ZOOM NO MOBILE (SAFARI/iOS E OUTROS NAVEGADORES) =====
+// Impede o gesto de pinça (pinch-to-zoom) e zoom por escala
+document.addEventListener('touchmove', function (event) {
+  if (event.scale !== undefined && event.scale !== 1) {
+    event.preventDefault();
+  }
+}, { passive: false });
+
+document.addEventListener('touchstart', function (event) {
+  if (event.touches.length > 1) {
+    event.preventDefault();
+  }
+}, { passive: false });
+
+// Impede o duplo toque rápido para dar zoom (double-tap zoom)
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+  const now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
+
+// Impede gestos nativos do Safari
+document.addEventListener('gesturestart', function (event) {
+  event.preventDefault();
+});
+
