@@ -118,12 +118,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Envia os dados para o Forminit e aguarda o término da requisição
     if (FORMINIT_URL) {
       const formDataToSend = new FormData();
-      formDataToSend.append('Nome Completo', data.nome);
-      formDataToSend.append('WhatsApp', data.whatsapp);
-      formDataToSend.append('Sobre o Negócio', data.negocio);
-      formDataToSend.append('Já tem Produto Digital?', data.produto_digital);
-      formDataToSend.append('Faturamento Mensal', data.faturamento);
-      formDataToSend.append('Maior Dificuldade', data.dificuldade);
+      formDataToSend.append('fi-text-NomeCompleto', data.nome);
+      formDataToSend.append('fi-text-WhatsApp', data.whatsapp);
+      formDataToSend.append('fi-text-SobreONegocio', data.negocio);
+      formDataToSend.append('fi-text-JaTemProdutoDigital', data.produto_digital);
+      formDataToSend.append('fi-text-FaturamentoMensal', data.faturamento);
+      formDataToSend.append('fi-text-MaiorDificuldade', data.dificuldade);
 
       try {
         await fetch(FORMINIT_URL, {
