@@ -1,6 +1,6 @@
 // ===== CONFIGURAÇÃO DO WHATSAPP =====
 // Substitua o número abaixo pelo seu número de WhatsApp de atendimento.
-const WHATSAPP_NUMBER = '5531993773678'; 
+const WHATSAPP_NUMBER = '5562985114144'; 
 
 // ===== CONFIGURAÇÃO DO FORMINIT =====
 // Cole o ID ou o endpoint completo do formulário do Forminit abaixo.
