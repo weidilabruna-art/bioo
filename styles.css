@@ -1,12 +1,12 @@
 :root {
-  --teal: #002223;
-  --lime: #c8e632;
-  --cream: #f5f0e8;
-  --ink: #1a1a1a;
-  --border: #d8d2c6;
+  --teal: #3E2203; /* Marrom escuro da Duda */
+  --lime: #02A51F; /* Verde esmeralda da Duda */
+  --cream: #FAF6F0; /* Creme claro da Duda */
+  --ink: #2C1E16; /* Tom chumbo marrom para texto */
+  --border: #e0d5c1; /* Borda quente suave */
   --white: #ffffff;
   --error: #e04f4f;
-  --shadow: rgba(0, 34, 35, 0.08);
+  --shadow: rgba(62, 34, 3, 0.06);
   
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'Inter', sans-serif;
@@ -247,7 +247,7 @@ textarea:focus, input[type="text"]:focus, input[type="tel"]:focus, select:focus 
   width: 100%;
   text-align: center;
   background: var(--lime);
-  color: var(--teal);
+  color: var(--white); /* Texto branco para leitura no verde */
   font-family: inherit;
   font-weight: 700;
   font-size: 15px;
@@ -365,14 +365,14 @@ textarea:focus, input[type="text"]:focus, input[type="tel"]:focus, select:focus 
 
 .success-button {
   background: var(--teal);
-  color: var(--lime);
-  box-shadow: 0 4px 12px rgba(0, 34, 35, 0.15);
+  color: var(--white);
+  box-shadow: 0 4px 12px rgba(62, 34, 3, 0.15);
 }
 
 .success-button:hover {
-  background: #003638;
-  color: var(--lime);
-  box-shadow: 0 6px 18px rgba(0, 34, 35, 0.25);
+  background: #502E05;
+  color: var(--white);
+  box-shadow: 0 6px 18px rgba(62, 34, 3, 0.25);
 }
 
 /* Responsividade */
