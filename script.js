@@ -1,8 +1,11 @@
 // ===== CONFIGURAÇÃO DO WHATSAPP =====
 // Substitua o número abaixo pelo seu número de WhatsApp de atendimento.
-// O número deve conter: Código do País (55) + DDD + Número.
-// IMPORTANTE: NÃO COLOQUE espaços, traços ou parênteses.
 const WHATSAPP_NUMBER = '5531993773678'; 
+
+// ===== CONFIGURAÇÃO DO WEBHOOK (MAKE / GOOGLE SHEETS / E-MAIL) =====
+// Se você criar um cenário no Make.com para salvar as aplicações em uma planilha 
+// ou enviar alertas por e-mail, cole a URL do seu Webhook entre as aspas abaixo:
+const MAKE_WEBHOOK_URL = ''; 
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('app-form');
@@ -104,6 +107,17 @@ document.addEventListener('DOMContentLoaded', () => {
       `*4. Maior dificuldade hoje:*`,
       data.dificuldade
     ].join('\n');
+
+    // Envia os dados para o Webhook do Make (caso configurado)
+    if (MAKE_WEBHOOK_URL) {
+      fetch(MAKE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).catch(err => console.warn('Erro ao enviar dados para o Webhook:', err));
+    }
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
