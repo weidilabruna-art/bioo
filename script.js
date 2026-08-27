@@ -169,7 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
       formContainer.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Tenta abrir em nova aba automaticamente
-    window.open(whatsappUrl, '_blank');
+    // Redireciona a página atual para o WhatsApp automaticamente após 1.5 segundos
+    setTimeout(() => {
+      window.location.href = whatsappUrl;
+    }, 1500);
   });
 });
