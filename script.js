@@ -37,11 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
     requiredGroups.forEach((group) => {
       let isGroupFilled = false;
 
-      // Verifica Textareas/Inputs de texto e telefone
-      const textFields = group.querySelectorAll('textarea, input[type="text"], input[type="tel"]');
-      if (textFields.length > 0) {
-        textFields.forEach((field) => {
-          if (field.value.trim() !== '') {
+      // Verifica Textareas/Inputs de texto, telefone e select
+      const fields = group.querySelectorAll('textarea, input[type="text"], input[type="tel"], select');
+      if (fields.length > 0) {
+        fields.forEach((field) => {
+          if (field.value && field.value.trim() !== '') {
             isGroupFilled = true;
           }
         });
@@ -80,30 +80,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // Coleta dos dados do formulário
     const formData = new FormData(form);
     const data = {
-      profissao: formData.get('profissao'),
-      faturamento: formData.get('faturamento'),
-      obstaculo: formData.get('obstaculo'),
-      investimento: formData.get('investimento'),
       nome: formData.get('nome'),
-      instagram: formData.get('instagram'),
-      whatsapp: formData.get('whatsapp')
+      whatsapp: formData.get('whatsapp'),
+      negocio: formData.get('negocio'),
+      produto_digital: formData.get('produto_digital'),
+      faturamento: formData.get('faturamento'),
+      dificuldade: formData.get('dificuldade')
     };
 
     // Geração da mensagem formatada para o WhatsApp
     const message = [
-      '*NOVA APLICAÇÃO - MENTORIA*',
+      '*NOVA APLICAÇÃO - SESSÃO ESTRATÉGICA*',
       '',
-      `*1. O que faz hoje:*`,
-      data.profissao,
+      `*Nome:* ${data.nome}`,
+      `*WhatsApp:* ${data.whatsapp}`,
       '',
-      `*2. Faturamento mensal:* ${data.faturamento}`,
-      `*3. Maior obstáculo:* ${data.obstaculo}`,
-      `*4. Disponibilidade de investimento:* ${data.investimento}`,
+      `*1. Já tem um negócio? Sobre ele:*`,
+      data.negocio,
       '',
-      `*Contato:*`,
-      `- Nome: ${data.nome}`,
-      `- Instagram: ${data.instagram}`,
-      `- WhatsApp: ${data.whatsapp}`
+      `*2. Já tem um produto digital?* ${data.produto_digital}`,
+      `*3. Faturamento mensal hoje:* ${data.faturamento}`,
+      '',
+      `*4. Maior dificuldade hoje:*`,
+      data.dificuldade
     ].join('\n');
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
