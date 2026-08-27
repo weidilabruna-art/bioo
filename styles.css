@@ -317,7 +317,7 @@ textarea:focus, input[type="text"]:focus, input[type="tel"]:focus, select:focus 
 .photo-side {
   flex: 1 1 50%;
   background-color: var(--teal);
-  background-image: url('hero_photo.jpg');
+  background-image: url('hero_photo.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -393,6 +393,7 @@ textarea:focus, input[type="text"]:focus, input[type="tel"]:focus, select:focus 
     order: -1;
     min-height: 280px;
     background-position: center 20%;
+    background-image: url('hero_photo.jpg');
   }
   .form-side {
     padding: 40px 20px;
