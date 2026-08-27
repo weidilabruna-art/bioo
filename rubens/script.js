@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Geração da mensagem formatada para o WhatsApp
     const message = [
-      '*NOVA APLICAÇÃO - SESSÃO ESTRATÉGICA*',
+      '*SESSÃO ESTRATÉGICA*',
       '',
       `*Nome:* ${data.nome}`,
       `*WhatsApp:* ${data.whatsapp}`,
