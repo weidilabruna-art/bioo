@@ -2,10 +2,9 @@
 // Substitua o número abaixo pelo seu número de WhatsApp de atendimento.
 const WHATSAPP_NUMBER = '5531993773678'; 
 
-// ===== CONFIGURAÇÃO DE RECEBIMENTO POR E-MAIL (FORMSUBMIT) =====
-// Digite abaixo o e-mail onde deseja receber as notificações de novas aplicações.
-// O FormSubmit enviará o e-mail automaticamente e salvará os dados em seu painel gratuito.
-const NOTIFICATION_EMAIL = 'weidilabruna@gmail.com'; 
+// ===== CONFIGURAÇÃO DO FORMINIT =====
+// Cole o ID ou o endpoint completo do formulário do Forminit abaixo.
+const FORMINIT_URL = 'https://app.forminit.com/f/p4qc17jp2py'; 
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('app-form');
@@ -108,9 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
       data.dificuldade
     ].join('\n');
 
-    // Envia os dados para o FormSubmit (receber por e-mail e salvar no painel)
-    if (NOTIFICATION_EMAIL) {
-      fetch(`https://formsubmit.co/ajax/${NOTIFICATION_EMAIL}`, {
+    // Envia os dados para o Forminit (salvar no painel e receber notificações por e-mail)
+    if (FORMINIT_URL) {
+      fetch(FORMINIT_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -124,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
           'Faturamento Mensal': data.faturamento,
           'Maior Dificuldade': data.dificuldade
         })
-      }).catch(err => console.warn('Erro ao enviar dados para o FormSubmit:', err));
+      }).catch(err => console.warn('Erro ao enviar dados para o Forminit:', err));
     }
 
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
