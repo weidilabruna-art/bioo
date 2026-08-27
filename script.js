@@ -4,7 +4,7 @@ const WHATSAPP_NUMBER = '5531993773678';
 
 // ===== CONFIGURAÇÃO DO FORMINIT =====
 // Cole o ID ou o endpoint completo do formulário do Forminit abaixo.
-const FORMINIT_URL = 'https://app.forminit.com/f/p4qc17jp2py'; 
+const FORMINIT_URL = 'https://forminit.com/f/p4qc17jp2py'; 
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('app-form');
