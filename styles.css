@@ -58,6 +58,16 @@ html, body {
   }
 }
 
+.brand-logo {
+  margin-bottom: 28px;
+}
+
+.brand-logo img {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
 .form-card h1 {
   font-family: var(--font-serif);
   font-size: 34px;
