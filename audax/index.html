@@ -125,12 +125,52 @@ body::before {
   background: transparent; border: none;
   border-bottom: 1px solid var(--input-border-bottom);
   transition: border-color 0.25s ease;
+  position: relative;
 }
 .phone-input-group:focus-within { border-bottom-color: #fff; }
 
-.country-badge { display: flex; align-items: center; gap: 6px; padding: 8px 0 12px 0; user-select: none; flex-shrink: 0; }
-.country-badge .flag { font-size: 20px; line-height: 1; }
-.country-badge .dial-code { font-size: 16px; font-weight: 400; color: rgba(255,255,255,0.85); }
+/* Seletor clicável */
+.country-selector {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 0 12px 0; cursor: pointer; user-select: none; flex-shrink: 0;
+  position: relative;
+}
+.country-selector .flag { font-size: 20px; line-height: 1; }
+.country-selector .dial-code { font-size: 16px; font-weight: 400; color: rgba(255,255,255,0.85); }
+.selector-arrow { font-size: 10px; opacity: 0.6; margin-left: 2px; transition: transform 0.2s; }
+.country-selector[aria-expanded="true"] .selector-arrow { transform: rotate(180deg); }
+
+/* Dropdown */
+.country-dropdown {
+  display: none; position: absolute; top: calc(100% + 6px); left: 0;
+  width: 260px; max-height: 280px;
+  background: rgba(30,30,30,0.97); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px; overflow: hidden;
+  z-index: 200; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  backdrop-filter: blur(12px);
+}
+.country-dropdown.open { display: flex; flex-direction: column; }
+.country-search-wrap { padding: 10px 10px 6px; flex-shrink: 0; }
+.country-search-wrap input {
+  width: 100%; padding: 7px 10px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 5px; color: #fff; font-size: 14px; font-family: inherit; outline: none;
+}
+.country-search-wrap input::placeholder { color: rgba(255,255,255,0.4); }
+.country-list {
+  list-style: none; overflow-y: auto; flex: 1;
+  padding: 4px 0; margin: 0;
+}
+.country-list li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px; cursor: pointer; font-size: 14px; color: #fff;
+  transition: background 0.15s;
+}
+.country-list li:hover { background: rgba(255,255,255,0.12); }
+.country-list li.selected { background: rgba(255,255,255,0.18); }
+.country-list li .c-flag { font-size: 18px; flex-shrink: 0; }
+.country-list li .c-name { flex: 1; }
+.country-list li .c-dial { font-size: 13px; opacity: 0.6; }
 
 .phone-input {
   border: none !important; border-bottom: none !important;
@@ -322,11 +362,21 @@ body::before {
           <p class="question-hint">Digite este número corretamente, iremos entrar em contato por aqui.</p>
           <div class="field-wrap">
             <div class="phone-input-group">
-              <div class="country-badge">
-                <span class="flag">🇧🇷</span>
-                <span class="dial-code">+55</span>
+              <!-- Seletor de país -->
+              <div class="country-selector" id="countrySelectorBtn" onclick="toggleCountryDropdown()" tabindex="0" role="button" aria-haspopup="listbox" aria-expanded="false">
+                <span class="flag" id="selectedFlag">🇧🇷</span>
+                <span class="dial-code" id="selectedDial">+55</span>
+                <span class="selector-arrow">▾</span>
+              </div>
+              <!-- Dropdown de países -->
+              <div class="country-dropdown" id="countryDropdown" role="listbox">
+                <div class="country-search-wrap">
+                  <input type="text" id="countrySearch" placeholder="Pesquisar..." autocomplete="off" oninput="filterCountries(this.value)" onclick="event.stopPropagation()">
+                </div>
+                <ul class="country-list" id="countryList"></ul>
               </div>
               <input type="tel" id="input-whatsapp" name="whatsapp" class="field-input phone-input" placeholder="(00) 00000-0000" maxlength="15" autocomplete="tel" required>
+            </div>
             </div>
             <div class="field-error" id="error-whatsapp">Por favor, digite um número de WhatsApp válido com DDD.</div>
           </div>
@@ -558,6 +608,101 @@ function submitCurrentStep() {
     nextStep(); return;
   }
 }
+
+/* ── Seletor de País ── */
+const COUNTRIES = [
+  { flag:'🇧🇷', name:'Brasil',           dial:'+55' },
+  { flag:'🇺🇸', name:'Estados Unidos',   dial:'+1'  },
+  { flag:'🇵🇹', name:'Portugal',         dial:'+351'},
+  { flag:'🇦🇷', name:'Argentina',        dial:'+54' },
+  { flag:'🇨🇴', name:'Colômbia',         dial:'+57' },
+  { flag:'🇲🇽', name:'México',           dial:'+52' },
+  { flag:'🇪🇸', name:'Espanha',          dial:'+34' },
+  { flag:'🇬🇧', name:'Reino Unido',      dial:'+44' },
+  { flag:'🇨🇦', name:'Canadá',           dial:'+1'  },
+  { flag:'🇩🇪', name:'Alemanha',         dial:'+49' },
+  { flag:'🇫🇷', name:'França',           dial:'+33' },
+  { flag:'🇮🇹', name:'Itália',           dial:'+39' },
+  { flag:'🇯🇵', name:'Japão',            dial:'+81' },
+  { flag:'🇦🇺', name:'Austrália',        dial:'+61' },
+  { flag:'🇨🇱', name:'Chile',            dial:'+56' },
+  { flag:'🇵🇪', name:'Peru',             dial:'+51' },
+  { flag:'🇧🇴', name:'Bolívia',          dial:'+591'},
+  { flag:'🇺🇾', name:'Uruguai',          dial:'+598'},
+  { flag:'🇵🇾', name:'Paraguai',         dial:'+595'},
+  { flag:'🇻🇪', name:'Venezuela',        dial:'+58' },
+  { flag:'🇦🇴', name:'Angola',           dial:'+244'},
+  { flag:'🇲🇿', name:'Moçambique',       dial:'+258'},
+  { flag:'🇨🇻', name:'Cabo Verde',       dial:'+238'},
+  { flag:'🇿🇦', name:'África do Sul',    dial:'+27' },
+  { flag:'🇨🇭', name:'Suíça',            dial:'+41' },
+  { flag:'🇳🇱', name:'Países Baixos',    dial:'+31' },
+  { flag:'🇧🇪', name:'Bélgica',          dial:'+32' },
+  { flag:'🇸🇪', name:'Suécia',           dial:'+46' },
+  { flag:'🇳🇴', name:'Noruega',          dial:'+47' },
+  { flag:'🇮🇪', name:'Irlanda',          dial:'+353'},
+  { flag:'🇳🇿', name:'Nova Zelândia',    dial:'+64' },
+  { flag:'🇦🇪', name:'Emirados Árabes',  dial:'+971'},
+];
+
+let selectedCountry = COUNTRIES[0];
+let dropdownOpen = false;
+
+function buildCountryList(filter = '') {
+  const ul = document.getElementById('countryList');
+  if (!ul) return;
+  const q = filter.toLowerCase();
+  const filtered = COUNTRIES.filter(c =>
+    c.name.toLowerCase().includes(q) || c.dial.includes(q)
+  );
+  ul.innerHTML = filtered.map(c => `
+    <li onclick="selectCountry('${c.dial}')" class="${c.dial === selectedCountry.dial && c.name === selectedCountry.name ? 'selected' : ''}">
+      <span class="c-flag">${c.flag}</span>
+      <span class="c-name">${c.name}</span>
+      <span class="c-dial">${c.dial}</span>
+    </li>`).join('');
+}
+
+function toggleCountryDropdown() {
+  const btn = document.getElementById('countrySelectorBtn');
+  const dd  = document.getElementById('countryDropdown');
+  if (!dd) return;
+  dropdownOpen = !dropdownOpen;
+  dd.classList.toggle('open', dropdownOpen);
+  btn.setAttribute('aria-expanded', dropdownOpen);
+  if (dropdownOpen) {
+    buildCountryList();
+    const search = document.getElementById('countrySearch');
+    if (search) { search.value = ''; search.focus(); }
+  }
+}
+
+function filterCountries(val) { buildCountryList(val); }
+
+function selectCountry(dial) {
+  const country = COUNTRIES.find(c => c.dial === dial) || COUNTRIES[0];
+  selectedCountry = country;
+  document.getElementById('selectedFlag').textContent = country.flag;
+  document.getElementById('selectedDial').textContent = country.dial;
+  // fecha dropdown
+  dropdownOpen = false;
+  const dd = document.getElementById('countryDropdown');
+  const btn = document.getElementById('countrySelectorBtn');
+  if (dd)  dd.classList.remove('open');
+  if (btn) btn.setAttribute('aria-expanded', 'false');
+  document.getElementById('input-whatsapp').focus();
+}
+
+// Fecha dropdown ao clicar fora
+document.addEventListener('click', function(e) {
+  const btn = document.getElementById('countrySelectorBtn');
+  const dd  = document.getElementById('countryDropdown');
+  if (dropdownOpen && btn && !btn.contains(e.target) && dd && !dd.contains(e.target)) {
+    dropdownOpen = false;
+    dd.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+});
 
 /* ── Seleção de opções ── */
 function selectChoice(field, value, el) {
