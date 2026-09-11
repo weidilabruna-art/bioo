@@ -90,6 +90,11 @@ body::before {
 .required-star { color: #ff5252; margin-left: 2px; }
 .question-hint { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 18px; line-height: 1.4; }
 
+/* Pergunta 5 — texto longo, fonte um pouco menor */
+#step-5 .question-label {
+  font-size: clamp(20px, 3.2vw, 28px);
+}
+
 /* ── Inputs — apenas linha inferior, sem caixa ── */
 .field-wrap { width: 100%; max-width: 520px; margin-bottom: 22px; }
 
@@ -399,6 +404,10 @@ body::before {
             </button>
           </div>
           <div class="field-error" id="error-faturamento">Selecione seu faturamento para finalizar.</div>
+          <div class="slide-action" style="margin-top:18px;">
+            <button type="button" class="btn-primary" onclick="submitCurrentStep()"><span>Enviar respostas →</span></button>
+            <span class="key-hint">pressione <strong>Enter ↵</strong></span>
+          </div>
         </div>
       </section>
 
@@ -538,7 +547,8 @@ function selectChoice(field, value, el) {
   const list = el.closest('.choice-list');
   if (list) list.querySelectorAll('.choice-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
-  setTimeout(nextStep, 260);
+  // No faturamento (step 6) não avança automaticamente — espera o botão
+  if (field !== 'faturamento') setTimeout(nextStep, 260);
 }
 
 /* ── Errors ── */
@@ -626,8 +636,8 @@ async function onComplete() {
   const btn = document.getElementById('btn-whatsapp-direct');
   if (btn) btn.href = waUrl;
 
-  // Redireciona automaticamente após 2.5 segundos
-  setTimeout(() => { window.open(waUrl, '_blank'); }, 2500);
+  // Redireciona automaticamente após 2.5 segundos (mesma aba, evita bloqueio de popup)
+  setTimeout(() => { window.location.href = waUrl; }, 2500);
 }
 
 /* ── LocalStorage ── */
