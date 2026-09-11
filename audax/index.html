@@ -798,41 +798,27 @@ async function onComplete() {
   const fullPhone = (selectedCountry ? selectedCountry.dial : '+55') + ' ' + formData.whatsapp;
 
   if (CONFIG.WEBHOOK_URL) {
-    // Método 100% à prova de CORS: submeter form em um iframe oculto
-    let iframe = document.getElementById('hidden_iframe');
-    if (!iframe) {
-      iframe = document.createElement('iframe');
-      iframe.name = 'hidden_iframe';
-      iframe.id = 'hidden_iframe';
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
+    const formDataToSend = new FormData();
+    formDataToSend.append('nome', formData.nome);
+    formDataToSend.append('whatsapp', fullPhone);
+    formDataToSend.append('instagram', formData.instagram);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('busca_audax', formData.busca_audax);
+    formDataToSend.append('faturamento', formData.faturamento);
+    formDataToSend.append('submittedAt', new Date().toISOString());
+
+    try {
+      await fetch(CONFIG.WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: formDataToSend
+      });
+      console.log('Dados enviados ao Forminit com sucesso!');
+    } catch (err) {
+      console.warn('Erro ao enviar dados para o Forminit:', err);
     }
-
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = CONFIG.WEBHOOK_URL;
-    form.target = 'hidden_iframe';
-
-    const dataToSend = {
-      nome: formData.nome,
-      whatsapp: fullPhone,
-      instagram: formData.instagram,
-      email: formData.email,
-      busca_audax: formData.busca_audax,
-      faturamento: formData.faturamento,
-      submittedAt: new Date().toISOString()
-    };
-
-    for (const key in dataToSend) {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = key;
-      input.value = dataToSend[key];
-      form.appendChild(input);
-    }
-
-    document.body.appendChild(form);
-    form.submit();
   }
 
   const msg =
