@@ -399,11 +399,11 @@ body::before {
               <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
             </svg>
           </div>
-          <h2 class="slide-title">Recebemos sua aplicação! Em breve nosso time já entrará em contato.</h2>
-          <p class="slide-description">Suas respostas foram salvas com sucesso. Estamos analisando o seu perfil estrategicamente.</p>
+          <h2 class="slide-title">Aplicação enviada!</h2>
+          <p class="slide-description">Aguarde, estamos te direcionando para o WhatsApp...</p>
           <div class="thank-you-actions" id="thankYouActions">
             <a href="#" id="btn-whatsapp-direct" target="_blank" rel="noopener noreferrer" class="btn-primary btn-whatsapp">
-              <span>Finalizar no WhatsApp →</span>
+              <span>CONTINUAR NO WHATSAPP</span>
             </a>
           </div>
         </div>
@@ -602,17 +602,20 @@ async function onComplete() {
       });
     } catch(e) { console.warn('Webhook error:', e); }
   }
+
+  const msg =
+    'Olá vim do site e gostaria de saber mais sobre a Implementação Audax, esses são meus dados:\n\n' +
+    'Nome: ' + formData.nome + '\n' +
+    'Instagram: ' + formData.instagram + '\n' +
+    'Faturamento: ' + formData.faturamento;
+
+  const waUrl = 'https://wa.me/' + CONFIG.WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+
   const btn = document.getElementById('btn-whatsapp-direct');
-  if (btn) {
-    const msg = CONFIG.WA_TITLE + '\n\n' +
-      '*Nome:* ' + formData.nome + '\n' +
-      '*WhatsApp:* ' + formData.whatsapp + '\n' +
-      '*Instagram:* ' + formData.instagram + '\n' +
-      '*E-mail:* ' + formData.email + '\n' +
-      '*Busca Audax:* ' + formData.busca_audax + '\n' +
-      '*Faturamento:* ' + formData.faturamento;
-    btn.href = 'https://wa.me/' + CONFIG.WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
-  }
+  if (btn) btn.href = waUrl;
+
+  // Redireciona automaticamente após 2.5 segundos
+  setTimeout(() => { window.open(waUrl, '_blank'); }, 2500);
 }
 
 /* ── LocalStorage ── */
