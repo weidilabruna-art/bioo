@@ -799,13 +799,13 @@ async function onComplete() {
 
   if (CONFIG.WEBHOOK_URL) {
     const formDataToSend = new FormData();
-    formDataToSend.append('nome', formData.nome);
-    formDataToSend.append('whatsapp', fullPhone);
-    formDataToSend.append('instagram', formData.instagram);
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('busca_audax', formData.busca_audax);
-    formDataToSend.append('faturamento', formData.faturamento);
-    formDataToSend.append('submittedAt', new Date().toISOString());
+    formDataToSend.append('fi-text-Nome', formData.nome);
+    formDataToSend.append('fi-text-WhatsApp', fullPhone);
+    formDataToSend.append('fi-text-Instagram', formData.instagram);
+    formDataToSend.append('fi-text-Email', formData.email);
+    formDataToSend.append('fi-text-BuscaAudax', formData.busca_audax);
+    formDataToSend.append('fi-text-Faturamento', formData.faturamento);
+    formDataToSend.append('fi-text-SubmittedAt', new Date().toISOString());
 
     try {
       await fetch(CONFIG.WEBHOOK_URL, {
