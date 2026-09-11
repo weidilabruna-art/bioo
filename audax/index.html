@@ -780,13 +780,23 @@ function setupPhoneMask() {
 /* ── Conclusão ── */
 async function onComplete() {
   save();
+
+  // Monta o número completo com código do país
+  const fullPhone = (selectedCountry ? selectedCountry.dial : '+55') + ' ' + formData.whatsapp;
+
   if (CONFIG.WEBHOOK_URL) {
     try {
-      await fetch(CONFIG.WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, submittedAt: new Date().toISOString() })
-      });
+      // Forminit aceita FormData (multipart/form-data)
+      const fd = new FormData();
+      fd.append('nome',        formData.nome);
+      fd.append('whatsapp',    fullPhone);
+      fd.append('instagram',   formData.instagram);
+      fd.append('email',       formData.email);
+      fd.append('busca_audax', formData.busca_audax);
+      fd.append('faturamento', formData.faturamento);
+      fd.append('submittedAt', new Date().toISOString());
+
+      await fetch(CONFIG.WEBHOOK_URL, { method: 'POST', body: fd });
     } catch(e) { console.warn('Webhook error:', e); }
   }
 
