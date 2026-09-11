@@ -137,18 +137,18 @@ body::before {
 .choice-list { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 500px; margin: 12px 0 16px 0; }
 
 .choice-card {
-  display: flex; align-items: center; gap: 12px;
-  padding: 11px 16px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 5px;
-  color: #fff; font-family: inherit; font-size: 16px; font-weight: 400; text-align: left;
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.38);
+  border-radius: 6px;
+  color: #fff; font-family: inherit; font-size: 18px; font-weight: 400; text-align: left;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
-  backdrop-filter: blur(6px); outline: none;
+  backdrop-filter: blur(8px); outline: none;
 }
-.choice-card:hover { background: var(--card-hover-bg); border-color: rgba(255,255,255,0.65); transform: translateX(3px); }
-.choice-card.selected { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.85); }
+.choice-card:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.75); transform: translateX(3px); }
+.choice-card.selected { background: rgba(255,255,255,0.28); border-color: rgba(255,255,255,0.9); box-shadow: 0 0 14px rgba(255,255,255,0.25); }
 
 /* ── Key badge: só a letra, SEM borda ou fundo ── */
 .key-badge {
