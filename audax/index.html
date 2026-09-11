@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sessão Estratégica Gratuita</title>
+
+  <meta property="og:title" content="Sessão Estratégica Gratuita">
+  <meta property="og:description" content="Se você é empresária, profissional ou especialista e sente que poderia ganhar mais com tudo aquilo que sabe, responda às perguntas abaixo.">
+  <meta name="description" content="Sessão Estratégica Gratuita - Análise estratégica para negócio digital escalável">
+
+  <!-- Fonte Lato & Commissioner -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&family=Commissioner:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Barra de Progresso Superior -->
+  <div class="progress-bar-container" id="progressContainer">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+
+  <!-- Header / Logotipo -->
+  <header class="form-header">
+    <div class="logo-wrapper">
+      <img src="logo.png" alt="Logotipo Audax" class="form-logo" id="formLogo">
+    </div>
+  </header>
+
+  <!-- Container Principal do Formulário -->
+  <main class="form-viewport">
+    <div class="form-slides-container" id="slidesContainer">
+
+      <!-- ETAPA 0: Tela de Boas-vindas (Welcome) -->
+      <section class="slide-item active" data-step="0" id="step-0">
+        <div class="slide-content">
+          <h1 class="slide-title">Sessão Estratégica Gratuita</h1>
+          <p class="slide-description">
+            Se você é empresária, profissional ou especialista e sente que poderia ganhar mais com tudo aquilo que sabe, responda às perguntas abaixo. Vou analisar seu momento e entender se consigo te ajudar a transformar seu conhecimento ou serviço em um negócio digital escalável.
+          </p>
+          <div class="slide-action">
+            <button type="button" class="btn-primary" id="btn-start" onclick="nextStep()">
+              <span>Começar →</span>
+            </button>
+            <span class="key-hint">pressione <strong>Enter ↵</strong></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ETAPA 1: Nome -->
+      <section class="slide-item" data-step="1" id="step-1">
+        <div class="slide-content">
+          <label class="question-label" for="input-nome">
+            <span class="q-number">1/4</span> Qual seu nome? <span class="required-star">*</span>
+          </label>
+          <div class="field-wrap">
+            <input type="text" id="input-nome" name="nome" class="field-input" placeholder="Digite sua resposta aqui..." autocomplete="name" required>
+            <div class="field-error" id="error-nome">Por favor, preencha este campo.</div>
+          </div>
+          <div class="slide-action">
+            <button type="button" class="btn-primary" onclick="submitCurrentStep()">
+              <span>OK ✓</span>
+            </button>
+            <span class="key-hint">pressione <strong>Enter ↵</strong></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ETAPA 2: WhatsApp -->
+      <section class="slide-item" data-step="2" id="step-2">
+        <div class="slide-content">
+          <label class="question-label" for="input-whatsapp">
+            <span class="q-number">2/4</span> Qual é o seu número de WhatsApp? <span class="required-star">*</span>
+          </label>
+          <p class="question-hint">Digite este número corretamente, iremos entrar em contato por aqui.</p>
+          <div class="field-wrap">
+            <div class="phone-input-group">
+              <div class="country-badge" title="Brasil (+55)">
+                <span class="flag">🇧🇷</span>
+                <span class="dial-code">+55</span>
+              </div>
+              <input type="tel" id="input-whatsapp" name="whatsapp" class="field-input phone-input" placeholder="(00) 00000-0000" maxlength="15" autocomplete="tel" required>
+            </div>
+            <div class="field-error" id="error-whatsapp">Por favor, digite um número de WhatsApp válido com DDD.</div>
+          </div>
+          <div class="slide-action">
+            <button type="button" class="btn-primary" onclick="submitCurrentStep()">
+              <span>OK ✓</span>
+            </button>
+            <span class="key-hint">pressione <strong>Enter ↵</strong></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ETAPA 3: Instagram -->
+      <section class="slide-item" data-step="3" id="step-3">
+        <div class="slide-content">
+          <label class="question-label" for="input-instagram">
+            <span class="q-number">3/4</span> Qual é o @ do seu instagram? <span class="required-star">*</span>
+          </label>
+          <div class="field-wrap">
+            <input type="text" id="input-instagram" name="instagram" class="field-input" placeholder="@seuperfil" autocomplete="off" required>
+            <div class="field-error" id="error-instagram">Por favor, informe seu perfil do Instagram.</div>
+          </div>
+          <div class="slide-action">
+            <button type="button" class="btn-primary" onclick="submitCurrentStep()">
+              <span>OK ✓</span>
+            </button>
+            <span class="key-hint">pressione <strong>Enter ↵</strong></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ETAPA 4: E-mail -->
+      <section class="slide-item" data-step="4" id="step-4">
+        <div class="slide-content">
+          <label class="question-label" for="input-email">
+            <span class="q-number">4/4</span> Digite seu e-mail <span class="required-star">*</span>
+          </label>
+          <div class="field-wrap">
+            <input type="email" id="input-email" name="email" class="field-input" placeholder="nome@exemplo.com" autocomplete="email" required>
+            <div class="field-error" id="error-email">Por favor, insira um e-mail válido.</div>
+          </div>
+          <div class="slide-action">
+            <button type="button" class="btn-primary" onclick="submitCurrentStep()">
+              <span>OK ✓</span>
+            </button>
+            <span class="key-hint">pressione <strong>Enter ↵</strong></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ETAPA 5: Pergunta Audax (Sim / Não) -->
+      <section class="slide-item" data-step="5" id="step-5">
+        <div class="slide-content">
+          <div class="question-label">
+            <span class="q-number">3/4</span> A Implementação Audax é para quem quer criar ou escalar um curso e/ou mentoria. É isso que você busca? <span class="required-star">*</span>
+          </div>
+          <div class="choice-list" data-field="busca_audax">
+            <button type="button" class="choice-card" data-key="A" data-value="Sim" onclick="selectChoice('busca_audax', 'Sim', this)">
+              <span class="key-badge">A</span>
+              <span class="choice-text">Sim</span>
+              <span class="choice-check">✓</span>
+            </button>
+            <button type="button" class="choice-card" data-key="B" data-value="Não" onclick="selectChoice('busca_audax', 'Não', this)">
+              <span class="key-badge">B</span>
+              <span class="choice-text">Não</span>
+              <span class="choice-check">✓</span>
+            </button>
+          </div>
+          <div class="field-error" id="error-busca_audax">Selecione uma das opções para continuar.</div>
+          <div class="slide-action">
+            <span class="key-hint choice-hint">Pressione a tecla correspondente ou clique na opção</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ETAPA 6: Faturamento Mensal -->
+      <section class="slide-item" data-step="6" id="step-6">
+        <div class="slide-content">
+          <div class="question-label">
+            <span class="q-number">4/4</span> Qual a sua média de faturamento mensal? <span class="required-star">*</span>
+          </div>
+          <p class="question-hint">Escolha apenas uma opção</p>
+          <div class="choice-list" data-field="faturamento">
+            <button type="button" class="choice-card" data-key="A" data-value="Até R$ 5 mil" onclick="selectChoice('faturamento', 'Até R$ 5 mil', this)">
+              <span class="key-badge">A</span>
+              <span class="choice-text">Até R$ 5 mil</span>
+              <span class="choice-check">✓</span>
+            </button>
+            <button type="button" class="choice-card" data-key="B" data-value="De R$ 5 a R$ 10 mil" onclick="selectChoice('faturamento', 'De R$ 5 a R$ 10 mil', this)">
+              <span class="key-badge">B</span>
+              <span class="choice-text">De R$ 5 a R$ 10 mil</span>
+              <span class="choice-check">✓</span>
+            </button>
+            <button type="button" class="choice-card" data-key="C" data-value="De R$ 10 a R$ 20 mil" onclick="selectChoice('faturamento', 'De R$ 10 a R$ 20 mil', this)">
+              <span class="key-badge">C</span>
+              <span class="choice-text">De R$ 10 a R$ 20 mil</span>
+              <span class="choice-check">✓</span>
+            </button>
+            <button type="button" class="choice-card" data-key="D" data-value="De R$ 20 a R$ 50 mil" onclick="selectChoice('faturamento', 'De R$ 20 a R$ 50 mil', this)">
+              <span class="key-badge">D</span>
+              <span class="choice-text">De R$ 20 a R$ 50 mil</span>
+              <span class="choice-check">✓</span>
+            </button>
+            <button type="button" class="choice-card" data-key="E" data-value="De R$ 50 mil a R$ 100 mil" onclick="selectChoice('faturamento', 'De R$ 50 mil a R$ 100 mil', this)">
+              <span class="key-badge">E</span>
+              <span class="choice-text">De R$ 50 mil a R$ 100 mil</span>
+              <span class="choice-check">✓</span>
+            </button>
+            <button type="button" class="choice-card" data-key="F" data-value="Acima de R$ 100 mil" onclick="selectChoice('faturamento', 'Acima de R$ 100 mil', this)">
+              <span class="key-badge">F</span>
+              <span class="choice-text">Acima de R$ 100 mil</span>
+              <span class="choice-check">✓</span>
+            </button>
+          </div>
+          <div class="field-error" id="error-faturamento">Selecione seu faturamento para finalizar.</div>
+        </div>
+      </section>
+
+      <!-- ETAPA 7: Conclusão / Thank You -->
+      <section class="slide-item" data-step="7" id="step-7">
+        <div class="slide-content thank-you-content">
+          <div class="success-icon-badge">
+            <svg viewBox="0 0 52 52" class="checkmark-svg">
+              <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+              <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+          </div>
+          <h2 class="slide-title">Recebemos sua aplicação! Em breve nosso time já entrará em contato.</h2>
+          <p class="slide-description">
+            Suas respostas foram salvas com sucesso. Estamos analisando o seu perfil estrategicamente.
+          </p>
+          <div class="thank-you-actions" id="thankYouActions">
+            <a href="#" id="btn-whatsapp-direct" target="_blank" rel="noopener noreferrer" class="btn-primary btn-whatsapp">
+              <span>Finalizar no WhatsApp →</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Rodapé e Controles de Navegação Respondi -->
+  <footer class="form-footer">
+    <div class="footer-left">
+      <span class="respondi-badge">
+        Feito com <strong>Respondi</strong>
+        <svg class="respondi-icon" viewBox="0 0 97 97" fill="currentColor">
+          <path d="M88.5 24.8c-2.3-.7-4.3-1.4-6.4-1.8a4.2 4.2 0 0 0-2.5.2c-6.2 2.8-12.1 2.3-17.4-1.8-5.3-4.1-7.1-9.8-5.7-16.3 1.5-6.5 5.6-10.7 12.1-12.2 6.6-1.5 12.2.5 16.4 5.7 4.2 5.2 4.9 11.1 1.9 17.1-.6 1.2-.7 2.2-.2 3.5 1 2.3 1.5 4.1 2.2 6.1z"/>
+        </svg>
+      </span>
+    </div>
+
+    <!-- Setas de navegação Up/Down -->
+    <div class="nav-arrows" id="navArrows">
+      <button type="button" class="nav-arrow-btn" id="btn-nav-prev" onclick="prevStep()" title="Anterior (Shift + Enter)" disabled>
+        <svg viewBox="0 0 384 512" width="14" height="14" fill="currentColor">
+          <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2 160 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-306.7L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/>
+        </svg>
+      </button>
+      <button type="button" class="nav-arrow-btn" id="btn-nav-next" onclick="submitCurrentStep()" title="Próximo (Enter)">
+        <svg viewBox="0 0 384 512" width="14" height="14" fill="currentColor">
+          <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/>
+        </svg>
+      </button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
