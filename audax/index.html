@@ -475,7 +475,7 @@ body::before {
  */
 
 const CONFIG = {
-  WHATSAPP_NUMBER: '5562985114144',
+  WHATSAPP_NUMBER: '5521996768132',
   WEBHOOK_URL: 'https://forminit.com/f/p4qc17jp2py',
   WA_TITLE: 'Olá! Acabei de responder à Sessão Estratégica Gratuita:',
   TOTAL_STEPS: 7
@@ -656,8 +656,8 @@ async function onComplete() {
   const btn = document.getElementById('btn-whatsapp-direct');
   if (btn) btn.href = waUrl;
 
-  // Redireciona automaticamente após 2.5 segundos (mesma aba, evita bloqueio de popup)
-  setTimeout(() => { window.location.href = waUrl; }, 2500);
+  // Redireciona automaticamente após 1 segundo
+  setTimeout(() => { window.location.href = waUrl; }, 1000);
 }
 
 /* ── LocalStorage ── */
