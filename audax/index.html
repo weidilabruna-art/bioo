@@ -799,17 +799,22 @@ async function onComplete() {
 
   if (CONFIG.WEBHOOK_URL) {
     try {
-      // Forminit aceita FormData (multipart/form-data)
-      const fd = new FormData();
-      fd.append('nome',        formData.nome);
-      fd.append('whatsapp',    fullPhone);
-      fd.append('instagram',   formData.instagram);
-      fd.append('email',       formData.email);
-      fd.append('busca_audax', formData.busca_audax);
-      fd.append('faturamento', formData.faturamento);
-      fd.append('submittedAt', new Date().toISOString());
+      // Usa URLSearchParams que é o padrão de formulários (application/x-www-form-urlencoded)
+      const params = new URLSearchParams();
+      params.append('nome',        formData.nome);
+      params.append('whatsapp',    fullPhone);
+      params.append('instagram',   formData.instagram);
+      params.append('email',       formData.email);
+      params.append('busca_audax', formData.busca_audax);
+      params.append('faturamento', formData.faturamento);
+      params.append('submittedAt', new Date().toISOString());
 
-      await fetch(CONFIG.WEBHOOK_URL, { method: 'POST', body: fd });
+      // mode: 'no-cors' força o navegador a enviar sem bloquear por política de CORS
+      await fetch(CONFIG.WEBHOOK_URL, { 
+        method: 'POST', 
+        body: params,
+        mode: 'no-cors' 
+      });
     } catch(e) { console.warn('Webhook error:', e); }
   }
 
