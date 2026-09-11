@@ -798,24 +798,41 @@ async function onComplete() {
   const fullPhone = (selectedCountry ? selectedCountry.dial : '+55') + ' ' + formData.whatsapp;
 
   if (CONFIG.WEBHOOK_URL) {
-    try {
-      // Usa URLSearchParams que é o padrão de formulários (application/x-www-form-urlencoded)
-      const params = new URLSearchParams();
-      params.append('nome',        formData.nome);
-      params.append('whatsapp',    fullPhone);
-      params.append('instagram',   formData.instagram);
-      params.append('email',       formData.email);
-      params.append('busca_audax', formData.busca_audax);
-      params.append('faturamento', formData.faturamento);
-      params.append('submittedAt', new Date().toISOString());
+    // Método 100% à prova de CORS: submeter form em um iframe oculto
+    let iframe = document.getElementById('hidden_iframe');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = 'hidden_iframe';
+      iframe.id = 'hidden_iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
 
-      // mode: 'no-cors' força o navegador a enviar sem bloquear por política de CORS
-      await fetch(CONFIG.WEBHOOK_URL, { 
-        method: 'POST', 
-        body: params,
-        mode: 'no-cors' 
-      });
-    } catch(e) { console.warn('Webhook error:', e); }
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = CONFIG.WEBHOOK_URL;
+    form.target = 'hidden_iframe';
+
+    const dataToSend = {
+      nome: formData.nome,
+      whatsapp: fullPhone,
+      instagram: formData.instagram,
+      email: formData.email,
+      busca_audax: formData.busca_audax,
+      faturamento: formData.faturamento,
+      submittedAt: new Date().toISOString()
+    };
+
+    for (const key in dataToSend) {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = dataToSend[key];
+      form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
   }
 
   const msg =
@@ -829,8 +846,8 @@ async function onComplete() {
   const btn = document.getElementById('btn-whatsapp-direct');
   if (btn) btn.href = waUrl;
 
-  // Redireciona automaticamente após 1 segundo
-  setTimeout(() => { window.location.href = waUrl; }, 1000);
+  // Redireciona automaticamente após 1.5 segundos
+  setTimeout(() => { window.location.href = waUrl; }, 1500);
 }
 
 /* ── LocalStorage ── */
