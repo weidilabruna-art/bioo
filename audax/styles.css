@@ -28,7 +28,7 @@ html, body {
   overflow: hidden;
   font-family: var(--form-font);
   background-color: var(--form-color-bg);
-  background-image: url('bg.png');
+  background-image: url('/audax/bg.png'), url('bg.png'), url('https://cloudcdn.respondi.app/S11451/userfiles/176169/cc608808-5c81-445e-ac45-44f754701422.png?Expires=1789232025&KeyName=rsp-privateprodpkey&Signature=IY9VQuKWyelAruSCD8YAPugAAes=');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
