@@ -624,3 +624,16 @@ body::before {
     display: none;
   }
 }
+
+/* ── Correção de Teclado (telas curtas) ── */
+@media (max-height: 680px) {
+  .form-viewport {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding-top: 60px;
+  }
+  .form-slides-container {
+    min-height: unset;
+    margin-bottom: 40px;
+  }
+}

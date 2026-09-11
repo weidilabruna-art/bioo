@@ -277,6 +277,20 @@ body::before {
   .form-footer { padding: 0 20px; bottom: 18px; }
   .key-hint { display: none; }
 }
+
+/* ── Correção de Teclado (telas curtas) ── */
+@media (max-height: 680px) {
+  .form-viewport {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding-top: 60px;
+  }
+  .form-slides-container {
+    min-height: unset;
+    margin-bottom: 40px;
+  }
+}
+
   /* ── Bloqueia zoom em todos os browsers ── */
   html, body {
     touch-action: pan-x pan-y;
