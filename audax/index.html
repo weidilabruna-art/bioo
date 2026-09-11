@@ -540,6 +540,7 @@ body::before {
 const CONFIG = {
   WHATSAPP_NUMBER: '5521996768132',
   WEBHOOK_URL: 'https://forminit.com/f/p4qc17jp2py',
+  MAKE_WEBHOOK_URL: 'https://hook.us2.make.com/sin7hi5s4yj8c4gr2l1n7okt0qwspmol',
   WA_TITLE: 'Olá! Acabei de responder à Sessão Estratégica Gratuita:',
   TOTAL_STEPS: 7
 };
@@ -815,10 +816,30 @@ async function onComplete() {
         },
         body: formDataToSend
       });
-      console.log('Dados enviados ao Forminit com sucesso!');
-    } catch (err) {
-      console.warn('Erro ao enviar dados para o Forminit:', err);
-    }
+    } catch (err) { console.warn('Erro ao enviar para o Forminit:', err); }
+  }
+
+  if (CONFIG.MAKE_WEBHOOK_URL) {
+    // Número limpo (só dígitos) para facilitar a integração com a API da Audax no Make
+    const cleanPhone = fullPhone.replace(/\D/g, '');
+    
+    const makePayload = {
+      nome: formData.nome,
+      whatsapp: cleanPhone,
+      instagram: formData.instagram,
+      email: formData.email,
+      busca_audax: formData.busca_audax,
+      faturamento: formData.faturamento,
+      submittedAt: new Date().toISOString()
+    };
+
+    try {
+      await fetch(CONFIG.MAKE_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(makePayload)
+      });
+    } catch (err) { console.warn('Erro ao enviar para o Make:', err); }
   }
 
   const msg =
